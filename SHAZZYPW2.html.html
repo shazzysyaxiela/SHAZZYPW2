@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BLOOM COLLEGE REGISTER</title>
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      background-color: white;
+      color: black;
+      font-family: 'Cinzel', serif;
+      font-size: 1rem;
+      font-weight: bold;
+    }
+    .form-section {
+      margin-top: 40px;
+      background-color: #f8f9fa;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .center-title {
+      text-align: center;
+      margin-top: 30px;
+      font-size: 2rem;
+    }
+    .btn-custom {
+      width: 120px;
+    }
+
+    .image-box {
+      width: 150px;
+      height: 150px;
+      border: 2px dashed #aaa;
+      border-radius: 10px;
+      background-color: #f9f9f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .image-box input[type="file"] {
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+      opacity: 0; /* hide native file input */
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 2;
+    }
+
+    .image-box {
+  width: 150px;
+  height: 150px;
+  border: 2px dashed #aaa;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+}
+
+/* hide the default file input but keep it clickable */
+.image-box input[type="file"] {
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  cursor: pointer;
+}
+
+/* show text in the middle of the box */
+.image-box::before {
+  content: "Browse...";
+  color: #555;
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: center;
+  pointer-events: none;
+}
+
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <h2 class="center-title">BLOOM COLLEGE</h2>
+    <h4 class="text-center mb-4">Student Registration Form</h4>
+
+    <form class="form-section" onsubmit="showSuccessModal(event)">
+
+     <!-- Student Image -->
+<div class="row mb-3 align-items-center">
+  <label for="studentImage" class="col-sm-3 col-form-label text-end">Student Image:</label>
+
+  <div class="col-sm-9 d-flex align-items-center">
+    <div class="image-box me-3 position-relative">
+      <input class="form-control-file" type="file" id="studentImage" accept="image/*" onchange="previewImage(event)">
+    </div>
+    <small class="text-muted">(less than 5 MB)</small>
+  </div>
+</div>
+
+
+      <!-- Student Name -->
+      <div class="row mb-3">
+        <label for="studentName" class="col-sm-3 col-form-label text-end">Student Name:</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" id="studentName" placeholder="Full Name"
+            onchange="toUpperCaseText(this)">
+        </div>
+      </div>
+
+      <!-- Father’s Name -->
+      <div class="row mb-3">
+        <label for="fatherName" class="col-sm-3 col-form-label text-end">Father's Name:</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" id="fatherName" placeholder="Father's Full Name"
+            onchange="toUpperCaseText(this)">
+        </div>
+      </div>
+
+      <!-- Mother’s Name -->
+      <div class="row mb-3">
+        <label for="motherName" class="col-sm-3 col-form-label text-end">Mother's Name:</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" id="motherName" placeholder="Mother's Full Name"
+            onchange="toUpperCaseText(this)">
+        </div>
+      </div>
+
+      <!-- Gender -->
+      <div class="row mb-3">
+        <label class="col-sm-3 col-form-label text-end">Gender:</label>
+        <div class="col-sm-9">
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="gender" id="male" value="Male">
+            <label class="form-check-label" for="male">Male</label>
+          </div>
+          <div class="form-check form-check-inline">
+		  
+		  <input class="form-check-input" type="radio" name="gender" id="female" value="Female">
+            <label class="form-check-label" for="female">Female</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Date of Birth -->
+      <div class="row mb-3">
+        <label for="dob" class="col-sm-3 col-form-label text-end">Date of Birth:</label>
+        <div class="col-sm-9">
+          <input type="date" class="form-control" id="dob">
+        </div>
+      </div>
+
+      <!-- Email -->
+      <div class="row mb-3">
+        <label for="email" class="col-sm-3 col-form-label text-end">E-mail:</label>
+        <div class="col-sm-9">
+          <input type="email" class="form-control" id="email" placeholder="email@xyz.com"
+            onfocus="highlightField(this)" onblur="removeHighlight(this)">
+        </div>
+      </div>
+
+      <!-- Level -->
+      <div class="row mb-3">
+        <label for="level" class="col-sm-3 col-form-label text-end">Level:</label>
+        <div class="col-sm-9">
+          <select class="form-select" id="level">
+            <option selected disabled>Select Level</option>
+            <option>Diploma</option>
+            <option>Bachelor</option>
+            <option>Master</option>
+            <option>PhD</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Department -->
+      <div class="row mb-3">
+        <label for="department" class="col-sm-3 col-form-label text-end">Department:</label>
+        <div class="col-sm-9">
+          <select class="form-select" id="department">
+            <option selected disabled>Select Department</option>
+            <option>Civil Engineering</option>
+            <option>Information Technology</option>
+            <option>Business Management</option>
+            <option>Electric</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Telephone -->
+      <div class="row mb-3">
+        <label for="mobile" class="col-sm-3 col-form-label text-end">Tel/Mobile:</label>
+        <div class="col-sm-9">
+          <input type="tel" class="form-control" id="mobile" placeholder="01x-xxx xxxx">
+        </div>
+      </div>
+
+      <hr>
+      <h5 class="text-center mt-4">Address</h5>
+
+      <!-- Address Fields -->
+      <div class="row mb-3">
+        <label for="state" class="col-sm-3 col-form-label text-end">State:</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" id="state" placeholder="State">
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <label for="city" class="col-sm-3 col-form-label text-end">City:</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" id="city" placeholder="City">
+        </div>
+      </div>
+
+      <div class="row mb-4">
+        <label for="postcode" class="col-sm-3 col-form-label text-end">Postcode:</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" id="postcode" placeholder="Postcode">
+        </div>
+      </div>
+
+      <!-- Buttons -->
+      <div class="text-center">
+        <button type="submit" class="btn btn-dark btn-custom me-2">Register</button>
+        <button type="reset" class="btn btn-secondary btn-custom" onclick="resetImage()">Reset</button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Bootstrap Modal -->
+  <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content text-center">
+        <div class="modal-header">
+          <h5 class="modal-title" id="successModalLabel">Registration Successful</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Your details have been saved!
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+  <!-- JavaScript -->
+  <script>
+    function toUpperCaseText(input) {
+      input.
+	  
+	  value = input.value.toUpperCase();
+    }
+
+    function highlightField(field) {
+      field.style.backgroundColor = "#fff3cd"; // light yellow
+    }
+
+    function removeHighlight(field) {
+      field.style.backgroundColor = "white";
+    }
+
+    function showSuccessModal(event) {
+      event.preventDefault();
+      const modal = new bootstrap.Modal(document.getElementById('successModal'));
+      modal.show();
+    }
+
+    function previewImage(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const image = document.getElementById('preview');
+        image.src = URL.createObjectURL(file);
+        image.style.display = 'block';
+      }
+    }
+
+    function resetImage() {
+      const image = document.getElementById('preview');
+      image.src = '';
+      image.style.display = 'none';
+      document.getElementById('studentImage').value = '';
+    }
+  </script>
+</body>
+</html>
