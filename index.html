@@ -3,184 +3,304 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>TGV Vivacity Cinema - LEGO Friends</title>
+  <title>BLOOM COLLEGE REGISTER</title>
 
-  <!-- Bootstrap CSS (external) -->
+  <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Cinzel&display=swap" rel="stylesheet">
 
-  <!-- Internal CSS -->
   <style>
     body {
-      background-color: pink;
+      background-color: white;
       color: black;
       font-family: 'Cinzel', serif;
-      font-size: 1.2rem;
+      font-size: 1rem;
       font-weight: bold;
+    }
+    .form-section {
+      margin-top: 40px;
+      background-color: #f8f9fa;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      max-width: 700px;
+      margin-left: auto;
+      margin-right: auto;
     }
     .center-title {
       text-align: center;
       margin-top: 30px;
       font-size: 2rem;
     }
-    .info-box {
-      border: 3px solid black;
-      border-radius: 15px;
-      padding: 30px;
-      background-color: #fce4ec;
-      margin-top: 50px;
+    .btn-custom {
+      width: 120px;
     }
-    .showtime-btn {
-      background-color: #f8d7da;
-      border: 2px solid black;
-      padding: 10px 20px;
+
+    .image-box {
+      width: 150px;
+      height: 150px;
+      border: 2px dashed #aaa;
       border-radius: 10px;
-      transition: transform 0.2s, background-color 0.3s;
-      font-size: 1.2rem;
+      background-color: #f9f9f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .image-box input[type="file"] {
       width: 100%;
+      height: 100%;
       cursor: pointer;
+      opacity: 0; /* hide native file input */
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: 2;
     }
-    .showtime-btn:hover {
-      transform: scale(1.05);
-      background-color: #f5b5c2;
-    }
-    footer {
-      margin-top: 50px;
-      text-align: center;
-      padding: 10px;
-      background-color: #fce4ec;
-    }
-    summary {
-      cursor: pointer;
-    }
+
+    .image-box {
+  width: 150px;
+  height: 150px;
+  border: 2px dashed #aaa;
+  border-radius: 10px;
+  background-color: #f9f9f9;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+}
+
+/* hide the default file input but keep it clickable */
+.image-box input[type="file"] {
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  cursor: pointer;
+}
+
+/* show text in the middle of the box */
+.image-box::before {
+  content: "Browse...";
+  color: #555;
+  font-size: 1rem;
+  font-weight: bold;
+  text-align: center;
+  pointer-events: none;
+}
+
   </style>
 </head>
 
 <body>
+  <div class="container">
+    <h2 class="center-title">BLOOM COLLEGE</h2>
+    <h4 class="text-center mb-4">Student Registration Form</h4>
 
-<!-- Navbar (Bootstrap component) -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">TGV CINEMA</a>
-    <form class="d-flex mx-auto" style="max-width: 400px; width: 100%;">
-      <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-success" type="submit">Search</button>
+    <form class="form-section" onsubmit="showSuccessModal(event)">
+
+     <!-- Student Image -->
+<div class="row mb-3 align-items-center">
+  <label for="studentImage" class="col-sm-3 col-form-label text-end">Student Image:</label>
+
+  <div class="col-sm-9 d-flex align-items-center">
+    <div class="image-box me-3 position-relative">
+      <input class="form-control-file" type="file" id="studentImage" accept="image/*" onchange="previewImage(event)">
+    </div>
+    <small class="text-muted">(less than 5 MB)</small>
+  </div>
+</div>
+
+
+      <!-- Student Name -->
+      <div class="row mb-3">
+        <label for="studentName" class="col-sm-3 col-form-label text-end">Student Name:</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" id="studentName" placeholder="Full Name"
+            onchange="toUpperCaseText(this)">
+        </div>
+      </div>
+
+      <!-- Father’s Name -->
+      <div class="row mb-3">
+        <label for="fatherName" class="col-sm-3 col-form-label text-end">Father's Name:</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" id="fatherName" placeholder="Father's Full Name"
+            onchange="toUpperCaseText(this)">
+        </div>
+      </div>
+
+      <!-- Mother’s Name -->
+      <div class="row mb-3">
+        <label for="motherName" class="col-sm-3 col-form-label text-end">Mother's Name:</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" id="motherName" placeholder="Mother's Full Name"
+            onchange="toUpperCaseText(this)">
+        </div>
+      </div>
+
+      <!-- Gender -->
+      <div class="row mb-3">
+        <label class="col-sm-3 col-form-label text-end">Gender:</label>
+        <div class="col-sm-9">
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="gender" id="male" value="Male">
+            <label class="form-check-label" for="male">Male</label>
+          </div>
+          <div class="form-check form-check-inline">
+		  
+		  <input class="form-check-input" type="radio" name="gender" id="female" value="Female">
+            <label class="form-check-label" for="female">Female</label>
+          </div>
+        </div>
+      </div>
+
+      <!-- Date of Birth -->
+      <div class="row mb-3">
+        <label for="dob" class="col-sm-3 col-form-label text-end">Date of Birth:</label>
+        <div class="col-sm-9">
+          <input type="date" class="form-control" id="dob">
+        </div>
+      </div>
+
+      <!-- Email -->
+      <div class="row mb-3">
+        <label for="email" class="col-sm-3 col-form-label text-end">E-mail:</label>
+        <div class="col-sm-9">
+          <input type="email" class="form-control" id="email" placeholder="email@xyz.com"
+            onfocus="highlightField(this)" onblur="removeHighlight(this)">
+        </div>
+      </div>
+
+      <!-- Level -->
+      <div class="row mb-3">
+        <label for="level" class="col-sm-3 col-form-label text-end">Level:</label>
+        <div class="col-sm-9">
+          <select class="form-select" id="level">
+            <option selected disabled>Select Level</option>
+            <option>Diploma</option>
+            <option>Bachelor</option>
+            <option>Master</option>
+            <option>PhD</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Department -->
+      <div class="row mb-3">
+        <label for="department" class="col-sm-3 col-form-label text-end">Department:</label>
+        <div class="col-sm-9">
+          <select class="form-select" id="department">
+            <option selected disabled>Select Department</option>
+            <option>Civil Engineering</option>
+            <option>Information Technology</option>
+            <option>Business Management</option>
+            <option>Electric</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Telephone -->
+      <div class="row mb-3">
+        <label for="mobile" class="col-sm-3 col-form-label text-end">Tel/Mobile:</label>
+        <div class="col-sm-9">
+          <input type="tel" class="form-control" id="mobile" placeholder="01x-xxx xxxx">
+        </div>
+      </div>
+
+      <hr>
+      <h5 class="text-center mt-4">Address</h5>
+
+      <!-- Address Fields -->
+      <div class="row mb-3">
+        <label for="state" class="col-sm-3 col-form-label text-end">State:</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" id="state" placeholder="State">
+        </div>
+      </div>
+
+      <div class="row mb-3">
+        <label for="city" class="col-sm-3 col-form-label text-end">City:</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" id="city" placeholder="City">
+        </div>
+      </div>
+
+      <div class="row mb-4">
+        <label for="postcode" class="col-sm-3 col-form-label text-end">Postcode:</label>
+        <div class="col-sm-9">
+          <input type="text" class="form-control" id="postcode" placeholder="Postcode">
+        </div>
+      </div>
+
+      <!-- Buttons -->
+      <div class="text-center">
+        <button type="submit" class="btn btn-dark btn-custom me-2">Register</button>
+        <button type="reset" class="btn btn-secondary btn-custom" onclick="resetImage()">Reset</button>
+      </div>
     </form>
   </div>
-</nav>
 
-<!-- Movie Title -->
-<h1 class="center-title">LEGO FRIENDS</h1>
-
-<!-- Carousel -->
-<div id="legoCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000" align="center">
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="IMAGES/LEGO3.jpeg" class="d-block w-50" alt="LEGO Friends 3">
-    </div>
-    <div class="carousel-item">
-      <img src="IMAGES/LEGO4.jpeg" class="d-block w-50" alt="LEGO Friends 4">
-    </div>
-    <div class="carousel-item">
-      <img src="IMAGES/LEGO2.jpeg" class="d-block w-50" alt="LEGO Friends 5">
+  <!-- Bootstrap Modal -->
+  <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content text-center">
+        <div class="modal-header">
+          <h5 class="modal-title" id="successModalLabel">Registration Successful</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          Your details have been saved!
+        </div>
+      </div>
     </div>
   </div>
 
-  <!--Carousel controls -->
-  <button class="carousel-control-prev" type="button" data-bs-target="#legoCarousel" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#legoCarousel" data-bs-slide="next">
-    <span class="carousel-control-next-icon"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-</div>
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
 
+  <!-- JavaScript -->
+  <script>
+    function toUpperCaseText(input) {
+      input.
+	  
+	  value = input.value.toUpperCase();
+    }
 
-<!-- Info Section -->
-<div class="container">
-  <div class="info-box">
+    function highlightField(field) {
+      field.style.backgroundColor = "#fff3cd"; // light yellow
+    }
 
-    <h3 class="text-center mb-4">LEGO FRIENDS SHOWTIME</h3>
-    
-    <!-- Showtimes -->
-    <div class="row row-cols-2 row-cols-md-4 g-4 mb-4 text-center">
-      <div class="col">
-        <button class="showtime-btn" onclick="alert('You selected 11:00 AM')">MONDAY <br>11:00 AM</button>
-      </div>
-      <div class="col">
-        <button class="showtime-btn" onclick="alert('You selected 3:00 PM')">WEDNESDAY <br>3:00 PM</button>
-      </div>
-      <div class="col">
-        <button class="showtime-btn" onclick="alert('You selected 6:00 PM')">SATURDAY <br>6:00 PM</button>
-      </div>
-      <div class="col">
-        <button class="showtime-btn" onclick="alert('You selected 8:00 PM')">SUNDAY <br>8:00 PM</button>
-      </div>
-    </div>
-	
-	<div class="d-flex flex-column flex-md-row align-items-start gap-4 mt-4">
-  
-  <!-- Left side: Image -->
-  <div class="flex-shrink-0">
-    <img src="IMAGES/LEGO1.jpeg" alt="LEGO Friends Movie Poster" 
-         class="img-fluid" 
-         style="border: 8px solid white; border-radius: 20px; max-width: 300px;">
-  </div>
-  <br>
+    function removeHighlight(field) {
+      field.style.backgroundColor = "white";
+    }
 
-  <!-- Right side: Movie Info -->
-  <div>
-    <details class="mb-4">
-      <summary><strong>SYNOPSIS</strong></summary>
-      <p class="mt-2">
-        Five best friends put their teamwork, wits, and courage to the test when they go on a mission to protect Heartlake City from villains.
-      </p>
-    </details>
+    function showSuccessModal(event) {
+      event.preventDefault();
+      const modal = new bootstrap.Modal(document.getElementById('successModal'));
+      modal.show();
+    }
 
-    <details class="mb-4">
-      <summary><strong>THE CAST</strong></summary>
-      <p class="mt-2">
-        Jasmine St Clair, Allegra Clark, Rosamund Marks, Faye Mata, David Roach
-      </p>
-    </details>
+    function previewImage(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const image = document.getElementById('preview');
+        image.src = URL.createObjectURL(file);
+        image.style.display = 'block';
+      }
+    }
 
-    <details class="mb-4">
-      <summary><strong>RELEASE DATE</strong></summary>
-      <p class="mt-2">
-        Release Date: September 15, 2025
-      </p>
-    </details>
-	
-	 <details class="mb-4">
-      <summary><strong>GENRE</strong></summary>
-      <p class="mt-2">
-        KIDS 'TV',KIDS MUSIC
-      </p>
-    </details>
-  </div>
-
-</div>
-
-	
-	 <div class="text-center mt-4">
-  <a href="https://www.tgv.com.my/movies/lego-friends" target="_blank" class="btn btn-success">
-    Book Your Tickets Now
-  </a>
-</div>
-
-
-  </div>
-</div>
-
-<!-- Footer -->
-<footer>
-  &copy; 2025 TGV VIVACITY
-</footer>
-
-<!-- Bootstrap JS (external) -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-
+    function resetImage() {
+      const image = document.getElementById('preview');
+      image.src = '';
+      image.style.display = 'none';
+      document.getElementById('studentImage').value = '';
+    }
+  </script>
 </body>
 </html>
